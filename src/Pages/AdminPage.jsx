@@ -12,7 +12,7 @@ function AdminPage() {
           welcome {admin?.username} 🎉
         </h1>
         <p className="text-gray-700 mb-6">
-          kuraaxeyso adminkaaga.
+          enjoy your admin.
         </p>
 
         {/* Menu Buttons */}

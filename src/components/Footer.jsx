@@ -10,7 +10,7 @@ function Footer() {
         <div>
                   <div className="flex items-center gap-2">
                     <img src="https://i.pinimg.com/736x/df/83/f5/df83f585029b7996c15640a3396ef122.jpg" alt="Logo" className="w-10 h-10 rounded-full" />
-                    <h1 className="text-green-500 text-2xl font-extrabold hidden sm:block">
+                    <h1 className="text-green-500 text-2xl font-extrabold ">
                       Restaurant
                     </h1>
                   </div>
