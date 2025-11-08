@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useCart } from "../context/Cartcontext";
 
 function Cartpage() {
   const { cartItems, placeOrder } = useCart();
+  const [message, setMessage] = useState("");
 
   // ✅ Xisaabi total
   const total = cartItems.reduce((sum, item) => sum + item.price, 0);
+
+  const handleOrder = () => {
+    placeOrder();
+    setMessage("✅ Your order has been sent, please wait...");
+    setTimeout(() => setMessage(""), 7000); // fariinta ka saar 4s kadib
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-6">
@@ -13,6 +20,12 @@ function Cartpage() {
         <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
           🛒 Your Cart
         </h1>
+
+        {message && (
+          <div className="mb-4 text-center text-green-600 font-semibold">
+            {message}
+          </div>
+        )}
 
         {cartItems.length > 0 ? (
           <>
@@ -48,7 +61,7 @@ function Cartpage() {
                 Total: ${total.toFixed(2)}
               </h2>
               <button
-                onClick={() => placeOrder()}
+                onClick={handleOrder}
                 className="bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 transition"
               >
                 ✅ Confirm Order
@@ -56,9 +69,7 @@ function Cartpage() {
             </div>
           </>
         ) : (
-          <p className="text-gray-500 text-center text-lg">
-            Your cart is empty 
-          </p>
+          <p className="text-gray-500 text-center text-lg"> cart is empty</p>
         )}
       </div>
     </div>
