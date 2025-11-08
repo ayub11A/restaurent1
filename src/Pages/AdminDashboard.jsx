@@ -35,8 +35,11 @@ function AdminDashboard() {
             <p className="text-gray-500 mb-2">{item.description}</p>
             <div className="flex gap-2">
               <button onClick={() => handleEditMenu(item.id)} className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Edit</button>
-              <button onClick={() => toggleAvailable(item.id)} className={`px-3 py-1 rounded text-white ${item.available ? "bg-red-500 hover:bg-red-600" : "bg-green-500 hover:bg-green-600"}`}>
-                {item.available ? "hide" : "unhide"}
+              <button
+                onClick={() => toggleAvailable(item.id)}
+                className={`px-3 py-1 rounded text-white ${item.available ? "bg-red-500 hover:bg-red-600" : "bg-green-500 hover:bg-green-600"}`}
+              >
+                {item.available ? "Hide" : "Unhide"}
               </button>
               <button onClick={() => deleteMenuItem(item.id)} className="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-800">Delete</button>
             </div>
@@ -49,13 +52,13 @@ function AdminDashboard() {
 
       {orders.length > 0 ? (
         <>
-          {/* Clear All Orders Button */}
+          {/* Clear All Orders */}
           <div className="flex justify-end mb-3">
             <button
               onClick={clearOrders}
               className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
             >
-               Clear All Orders
+              Clear All Orders
             </button>
           </div>
 
@@ -100,7 +103,7 @@ function AdminDashboard() {
                         onClick={() => removeOrder(order.id)}
                         className="bg-gray-700 text-white px-2 py-1 rounded hover:bg-gray-800"
                       >
-                         Remove
+                        Remove
                       </button>
                     </td>
                   </tr>
