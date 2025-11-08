@@ -10,6 +10,7 @@ function Header() {
   const { cartItems } = useCart();
   const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const location = useLocation();
 
   const navLinks = [
@@ -30,7 +31,7 @@ function Header() {
         <div className="flex items-center gap-2">
           <img
             src="https://i.pinimg.com/736x/df/83/f5/df83f585029b7996c15640a3396ef122.jpg"
-            alt=""
+            alt="Logo"
             className="w-10 h-10 rounded-full"
           />
           <h1 className="text-green-500 text-2xl font-extrabold">Restaurant</h1>
@@ -56,7 +57,6 @@ function Header() {
 
         {/* Desktop Search + Cart */}
         <div className="hidden md:flex items-center gap-4">
-          {/* Search */}
           <div className="flex items-center bg-gray-800 rounded-md px-2 py-1">
             <CiSearch className="w-5 h-5 text-white mr-2" />
             <input
@@ -68,6 +68,24 @@ function Header() {
             />
           </div>
 
+          <Link to="/cartpage" className="relative">
+            <FaShoppingCart className="w-6 h-6 text-white cursor-pointer" />
+            {totalQuantity > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                {totalQuantity}
+              </span>
+            )}
+          </Link>
+        </div>
+
+    
+
+          {/* Mobile Search Toggle */}
+          <button onClick={() => setMobileSearchOpen(!mobileSearchOpen)}>
+            <CiSearch className="w-6 h-6 text-white cursor-pointer" />
+          </button>
+              {/* Mobile Controls: Cart + Search + Hamburger */}
+        <div className="md:hidden flex items-center gap-4">
           {/* Cart Icon */}
           <Link to="/cartpage" className="relative">
             <FaShoppingCart className="w-6 h-6 text-white cursor-pointer" />
@@ -77,20 +95,8 @@ function Header() {
               </span>
             )}
           </Link>
-        </div>
 
-        {/* Mobile Hamburger */}
-        <div className="md:hidden flex items-center gap-4">
-          {/* Cart Icon agta Hamburger */}
-          <Link to="/cartpage" className="relative">
-            <FaShoppingCart className="w-6 h-6 text-white cursor-pointer" />
-            {totalQuantity > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                {totalQuantity}
-              </span>
-            )}
-          </Link>
-
+          {/* Hamburger */}
           <button onClick={() => setMenuOpen(!menuOpen)}>
             {menuOpen ? (
               <FaTimes className="w-6 h-6 text-white" />
@@ -100,6 +106,19 @@ function Header() {
           </button>
         </div>
       </nav>
+
+      {/* Mobile Search Input */}
+      {mobileSearchOpen && (
+        <div className="md:hidden bg-gray-700 p-3 flex justify-center">
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search..."
+            className="bg-gray-600 text-white outline-none px-3 py-1 w-11/12 rounded"
+          />
+        </div>
+      )}
 
       {/* Mobile Menu */}
       {menuOpen && (
@@ -118,18 +137,6 @@ function Header() {
               {link.label}
             </Link>
           ))}
-
-          {/* Mobile Search */}
-          <div className="flex items-center bg-gray-700 rounded-md px-2 py-1 mt-3 w-11/12">
-            <CiSearch className="w-5 h-5 text-white mr-2" />
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search..."
-              className="bg-gray-700 text-white outline-none px-2 w-full"
-            />
-          </div>
         </div>
       )}
 
