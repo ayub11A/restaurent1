@@ -35,11 +35,8 @@ function AdminDashboard() {
             <p className="text-gray-500 mb-2">{item.description}</p>
             <div className="flex gap-2">
               <button onClick={() => handleEditMenu(item.id)} className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Edit</button>
-              <button
-                onClick={() => toggleAvailable(item.id)}
-                className={`px-3 py-1 rounded text-white ${item.available ? "bg-red-500 hover:bg-red-600" : "bg-green-500 hover:bg-green-600"}`}
-              >
-                {item.available ? "Hide" : "Unhide"}
+              <button onClick={() => toggleAvailable(item.id)} className={`px-3 py-1 rounded text-white ${item.available ? "bg-red-500 hover:bg-red-600" : "bg-green-500 hover:bg-green-600"}`}>
+                {item.available ? "hide" : "unhide"}
               </button>
               <button onClick={() => deleteMenuItem(item.id)} className="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-800">Delete</button>
             </div>
@@ -52,13 +49,13 @@ function AdminDashboard() {
 
       {orders.length > 0 ? (
         <>
-          {/* Clear All Orders */}
+          {/* Clear All Orders Button */}
           <div className="flex justify-end mb-3">
             <button
               onClick={clearOrders}
               className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
             >
-              Clear All Orders
+               Clear All Orders
             </button>
           </div>
 
@@ -67,8 +64,8 @@ function AdminDashboard() {
               <thead className="bg-gray-100 text-gray-700">
                 <tr>
                   <th className="px-4 py-2 text-left">#</th>
-                  <th className="px-4 py-2 text-left">Customer</th>
-                  <th className="px-4 py-2 text-left">Items (Table #)</th>
+                  <th className="px-4 py-2 text-left">Table(s)</th>
+                  <th className="px-4 py-2 text-left">Items</th>
                   <th className="px-4 py-2 text-left">Total</th>
                   <th className="px-4 py-2 text-left">Date & Time</th>
                   <th className="px-4 py-2 text-left">Status</th>
@@ -79,9 +76,11 @@ function AdminDashboard() {
                 {orders.map((order, index) => (
                   <tr key={order.id} className="border-t hover:bg-gray-50">
                     <td className="px-4 py-2">{index + 1}</td>
-                    <td className="px-4 py-2">{order.customerName}</td>
                     <td className="px-4 py-2">
-                      {order.items.map(i => `${i.name} (Table ${i.tableNumber})`).join(", ")}
+                      {order.items.map(i => `Table ${i.tableNumber}`).join(", ")}
+                    </td>
+                    <td className="px-4 py-2">
+                      {order.items.map(i => i.name).join(", ")}
                     </td>
                     <td className="px-4 py-2">${order.total.toFixed(2)}</td>
                     <td className="px-4 py-2">{new Date(order.date).toLocaleString()}</td>
@@ -103,7 +102,7 @@ function AdminDashboard() {
                         onClick={() => removeOrder(order.id)}
                         className="bg-gray-700 text-white px-2 py-1 rounded hover:bg-gray-800"
                       >
-                        Remove
+                         Remove
                       </button>
                     </td>
                   </tr>

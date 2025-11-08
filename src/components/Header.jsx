@@ -28,10 +28,12 @@ function Header() {
       <nav className="flex justify-between items-center px-6 py-3 md:py-4">
         {/* Logo */}
         <div className="flex items-center gap-2">
-          <img src="https://i.pinimg.com/736x/df/83/f5/df83f585029b7996c15640a3396ef122.jpg" alt="" className="w-10 h-10 rounded-full" />
-          <h1 className="text-green-500 text-2xl font-extrabold ">
-            Restaurant
-          </h1>
+          <img
+            src="https://i.pinimg.com/736x/df/83/f5/df83f585029b7996c15640a3396ef122.jpg"
+            alt=""
+            className="w-10 h-10 rounded-full"
+          />
+          <h1 className="text-green-500 text-2xl font-extrabold">Restaurant</h1>
         </div>
 
         {/* Desktop Navigation */}
@@ -54,6 +56,7 @@ function Header() {
 
         {/* Desktop Search + Cart */}
         <div className="hidden md:flex items-center gap-4">
+          {/* Search */}
           <div className="flex items-center bg-gray-800 rounded-md px-2 py-1">
             <CiSearch className="w-5 h-5 text-white mr-2" />
             <input
@@ -65,8 +68,9 @@ function Header() {
             />
           </div>
 
+          {/* Cart Icon */}
           <Link to="/cartpage" className="relative">
-            <FaShoppingCart className="w-6 h-6 text-white hover:text-green-500 cursor-pointer" />
+            <FaShoppingCart className="w-6 h-6 text-white cursor-pointer" />
             {totalQuantity > 0 && (
               <span className="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
                 {totalQuantity}
@@ -75,8 +79,18 @@ function Header() {
           </Link>
         </div>
 
-        {/* Mobile Menu Toggle */}
-        <div className="md:hidden flex items-center">
+        {/* Mobile Hamburger */}
+        <div className="md:hidden flex items-center gap-4">
+          {/* Cart Icon agta Hamburger */}
+          <Link to="/cartpage" className="relative">
+            <FaShoppingCart className="w-6 h-6 text-white cursor-pointer" />
+            {totalQuantity > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                {totalQuantity}
+              </span>
+            )}
+          </Link>
+
           <button onClick={() => setMenuOpen(!menuOpen)}>
             {menuOpen ? (
               <FaTimes className="w-6 h-6 text-white" />
@@ -116,20 +130,6 @@ function Header() {
               className="bg-gray-700 text-white outline-none px-2 w-full"
             />
           </div>
-
-          {/* Mobile Cart */}
-          <Link
-            to="/cartpage"
-            onClick={() => setMenuOpen(false)}
-            className="relative mt-3"
-          >
-            <FaShoppingCart className="w-6 h-6 text-white cursor-pointer" />
-            {totalQuantity > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
-                {totalQuantity}
-              </span>
-            )}
-          </Link>
         </div>
       )}
 
