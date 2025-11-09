@@ -11,7 +11,7 @@ function Cartpage() {
   const handleOrder = () => {
     placeOrder();
     setMessage("✅ Your order has been sent, please wait...");
-    setTimeout(() => setMessage(""), 7000); // fariinta ka saar 4s kadib
+    setTimeout(() => setMessage(""), 7000); 
   };
 
   return (

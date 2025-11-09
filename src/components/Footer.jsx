@@ -11,10 +11,10 @@ function Footer() {
                   <div className="flex items-center gap-2">
                     <img src="https://i.pinimg.com/736x/df/83/f5/df83f585029b7996c15640a3396ef122.jpg" alt="Logo" className="w-10 h-10 rounded-full" />
                     <h1 className="text-green-500 text-2xl font-extrabold ">
-                      Restaurant
+                     <span className="text-white">Kc</span>  Restaurant
                     </h1>
                   </div>
-          <p className="text-sm leading-6">
+          <p className="text-sm leading-6 mt-10">
             Experience delicious meals crafted with passion and fresh ingredients.  
             Taste the difference in every bite!
           </p>
@@ -36,6 +36,12 @@ function Footer() {
           <h3 className="text-lg font-semibold text-white mb-3">Opening Hours</h3>
           <ul className="space-y-2">
             <li>sat - Fri: 8:00 AM - 11:00 PM</li>
+           
+          
+          </ul>
+             <h3 className="text-lg font-semibold text-white mb-3">closing Hours</h3>
+          <ul className="space-y-2">
+            <li>sat - Fri: 11:00 pm - 7:00 Am</li>
            
           
           </ul>

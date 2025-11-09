@@ -34,7 +34,7 @@ function Header() {
             alt="Logo"
             className="w-10 h-10 rounded-full"
           />
-          <h1 className="text-green-500 text-2xl font-extrabold">Restaurant</h1>
+          <h1 className="text-green-500 text-2xl font-extrabold"><span className="text-white">Kc</span> Restaurant</h1>
         </div>
 
         {/* Desktop Navigation */}
