@@ -36,7 +36,7 @@ function AdminDashboard() {
             <div className="flex gap-2">
               <button onClick={() => handleEditMenu(item.id)} className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Edit</button>
               <button onClick={() => toggleAvailable(item.id)} className={`px-3 py-1 rounded text-white ${item.available ? "bg-red-500 hover:bg-red-600" : "bg-green-500 hover:bg-green-600"}`}>
-                {item.available ? "hide" : "unhide"}
+                {item.available ? "unhide" : "hide"}
               </button>
               <button onClick={() => deleteMenuItem(item.id)} className="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-800">Delete</button>
             </div>
