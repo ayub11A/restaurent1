@@ -13,8 +13,10 @@ function AdminDashboard() {
     const newDesc = prompt("Edit Description:", item.description);
     if (newName && !isNaN(newPrice) && newDesc) {
       setMenuItems(
-        menuItems.map(i =>
-          i.id === id ? { ...i, name: newName, price: newPrice, description: newDesc } : i
+        menuItems.map((i) =>
+          i.id === id
+            ? { ...i, name: newName, price: newPrice, description: newDesc }
+            : i
         )
       );
     }
@@ -22,23 +24,51 @@ function AdminDashboard() {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4 text-center text-gray-800">Admin Dashboard</h1>
+      <h1 className="text-2xl font-bold mb-4 text-center text-gray-800">
+        Admin Dashboard
+      </h1>
 
       {/* Menu Management */}
       <h2 className="text-xl font-semibold mb-2">Menu Management</h2>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-        {menuItems.map(item => (
-          <div key={item.id} className={`bg-white shadow-lg p-4 rounded ${!item.available ? "opacity-50" : ""}`}>
-            <img src={item.image} alt={item.name} className="h-48 w-full object-cover mb-3 rounded" />
+        {menuItems.map((item) => (
+          <div
+            key={item.id}
+            className={`bg-white shadow-lg p-4 rounded ${
+              !item.available ? "opacity-50" : ""
+            }`}
+          >
+            <img
+              src={item.image}
+              alt={item.name}
+              className="h-48 w-full object-cover mb-3 rounded"
+            />
             <h3 className="font-bold text-lg">{item.name}</h3>
             <p className="text-gray-700">${item.price.toFixed(2)}</p>
             <p className="text-gray-500 mb-2">{item.description}</p>
             <div className="flex gap-2">
-              <button onClick={() => handleEditMenu(item.id)} className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Edit</button>
-              <button onClick={() => toggleAvailable(item.id)} className={`px-3 py-1 rounded text-white ${item.available ? "bg-red-500 hover:bg-red-600" : "bg-green-500 hover:bg-green-600"}`}>
-                {item.available ? "unhide" : "hide"}
+              <button
+                onClick={() => handleEditMenu(item.id)}
+                className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+              >
+                Edit
               </button>
-              <button onClick={() => deleteMenuItem(item.id)} className="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-800">Delete</button>
+              <button
+                onClick={() => toggleAvailable(item.id)}
+                className={`px-3 py-1 rounded text-white ${
+                  item.available
+                    ? "bg-red-500 hover:bg-red-600"
+                    : "bg-green-500 hover:bg-green-600"
+                }`}
+              >
+                {item.available ? "Unhide" : "hide"}
+              </button>
+              <button
+                onClick={() => deleteMenuItem(item.id)}
+                className="bg-gray-700 text-white px-3 py-1 rounded hover:bg-gray-800"
+              >
+                Delete
+              </button>
             </div>
           </div>
         ))}
@@ -49,13 +79,12 @@ function AdminDashboard() {
 
       {orders.length > 0 ? (
         <>
-          {/* Clear All Orders Button */}
           <div className="flex justify-end mb-3">
             <button
               onClick={clearOrders}
               className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
             >
-               Clear All Orders
+              Clear All Orders
             </button>
           </div>
 
@@ -77,15 +106,19 @@ function AdminDashboard() {
                   <tr key={order.id} className="border-t hover:bg-gray-50">
                     <td className="px-4 py-2">{index + 1}</td>
                     <td className="px-4 py-2">
-                      {order.items.map(i => `Table ${i.tableNumber}`).join(", ")}
+                      {order.items.map((i) => `Table ${i.tableNumber}`).join(", ")}
                     </td>
-                    <td className="px-4 py-2">
-                      {order.items.map(i => i.name).join(", ")}
-                    </td>
+                    <td className="px-4 py-2">{order.items.map((i) => i.name).join(", ")}</td>
                     <td className="px-4 py-2">${order.total.toFixed(2)}</td>
                     <td className="px-4 py-2">{new Date(order.date).toLocaleString()}</td>
                     <td className="px-4 py-2">
-                      <span className={`px-2 py-1 rounded text-sm ${order.status === "Delivered" ? "bg-green-100 text-green-700" : "bg-yellow-100 text-yellow-700"}`}>
+                      <span
+                        className={`px-2 py-1 rounded text-sm ${
+                          order.status === "Delivered"
+                            ? "bg-green-100 text-green-700"
+                            : "bg-yellow-100 text-yellow-700"
+                        }`}
+                      >
                         {order.status}
                       </span>
                     </td>
@@ -102,7 +135,7 @@ function AdminDashboard() {
                         onClick={() => removeOrder(order.id)}
                         className="bg-gray-700 text-white px-2 py-1 rounded hover:bg-gray-800"
                       >
-                         Remove
+                        Remove
                       </button>
                     </td>
                   </tr>

@@ -6,7 +6,9 @@ const MenuContext = createContext();
 export const MenuProvider = ({ children }) => {
   const [menuItems, setMenuItems] = useState(() => {
     const saved = localStorage.getItem("menuItems");
-    return saved ? JSON.parse(saved) : MenuItemsData;
+    if (saved) return JSON.parse(saved);
+    // Default: all items hidden
+    return MenuItemsData.map(item => ({ ...item, available: false }));
   });
 
   useEffect(() => {
@@ -31,3 +33,4 @@ export const MenuProvider = ({ children }) => {
 };
 
 export const useMenu = () => useContext(MenuContext);
+export default MenuContext
