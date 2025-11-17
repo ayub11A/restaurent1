@@ -26,9 +26,7 @@ function Menu() {
   };
 
   const filteredItems = menuItems.filter(
-    (item) =>
-      item.available &&
-      item.name.toLowerCase().includes(searchTerm.toLowerCase())
+    (item) => item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -37,12 +35,12 @@ function Menu() {
       {toast && (
         <div className="fixed top-4 left-1/2 transform -translate-x-1/2 
                         bg-gray-800 text-white font-medium px-4 py-2 rounded-lg shadow-lg 
-                        z-[9999] animate-toast text-center max-w-xs  w-[90%] ml-40 mt-30">
+                        z-[9999] animate-toast text-center max-w-xs w-[90%] ml-40 mt-30">
           {toast}
         </div>
       )}
 
-      {/* Table Input Modal */}
+      {/* Table Input */}
       {showTableInput && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-[9998] p-4">
           <div className="bg-white border shadow-xl p-5 rounded-lg w-full max-w-sm">

@@ -7,6 +7,7 @@ export const MenuProvider = ({ children }) => {
   const [menuItems, setMenuItems] = useState(() => {
     const saved = localStorage.getItem("menuItems");
     if (saved) return JSON.parse(saved);
+
     // Default: all items available = true
     return MenuItemsData.map(item => ({ ...item, available: true }));
   });
