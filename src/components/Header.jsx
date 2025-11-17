@@ -34,7 +34,9 @@ function Header() {
             alt="Logo"
             className="w-10 h-10 rounded-full"
           />
-          <h1 className="text-green-500 text-2xl font-extrabold"><span className="text-white">Kc</span> Restaurant</h1>
+          <h1 className="text-green-500 text-2xl font-extrabold">
+            <span className="text-white">Kc</span> Restaurant
+          </h1>
         </div>
 
         {/* Desktop Navigation */}
@@ -78,14 +80,13 @@ function Header() {
           </Link>
         </div>
 
-    
-
-          {/* Mobile Search Toggle */}
+        {/* Mobile Controls: Search Icon + Cart + Hamburger */}
+        <div className="md:hidden flex items-center gap-4">
+          {/* Search Toggle */}
           <button onClick={() => setMobileSearchOpen(!mobileSearchOpen)}>
             <CiSearch className="w-6 h-6 text-white cursor-pointer" />
           </button>
-              {/* Mobile Controls: Cart + Search + Hamburger */}
-        <div className="md:hidden flex items-center gap-4">
+
           {/* Cart Icon */}
           <Link to="/cartpage" className="relative">
             <FaShoppingCart className="w-6 h-6 text-white cursor-pointer" />
@@ -98,11 +99,7 @@ function Header() {
 
           {/* Hamburger */}
           <button onClick={() => setMenuOpen(!menuOpen)}>
-            {menuOpen ? (
-              <FaTimes className="w-6 h-6 text-white" />
-            ) : (
-              <FaBars className="w-6 h-6 text-white" />
-            )}
+            {menuOpen ? <FaTimes className="w-6 h-6 text-white" /> : <FaBars className="w-6 h-6 text-white" />}
           </button>
         </div>
       </nav>
