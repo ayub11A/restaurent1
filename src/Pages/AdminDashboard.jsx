@@ -61,7 +61,7 @@ function AdminDashboard() {
                     : "bg-green-500 hover:bg-green-600"
                 }`}
               >
-                {item.available ? "Unhide" : "hide"}
+                {item.available ? "hide" : "unhide"}
               </button>
               <button
                 onClick={() => deleteMenuItem(item.id)}
