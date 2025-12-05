@@ -1,37 +1,69 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import MenuItemsData from "../data/MenuItems";
+import React, { createContext, useContext, useState, useEffect } from "react";
+import MenuItems from "../data/MenuItems";
 
 const MenuContext = createContext();
 
-export const MenuProvider = ({ children }) => {
-  const [menuItems, setMenuItems] = useState(() => {
-    const saved = localStorage.getItem("menuItems");
-    if (saved) return JSON.parse(saved);
+export const useMenu = () => useContext(MenuContext);
 
-    // Default: all items available = true
-    return MenuItemsData.map(item => ({ ...item, available: true }));
-  });
+export const MenuProvider = ({ children }) => {
+  const [menuItems, setMenuItems] = useState([]);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
-    localStorage.setItem("menuItems", JSON.stringify(menuItems));
-  }, [menuItems]);
+    setMenuItems(MenuItems);
+  }, []);
 
-  const toggleAvailable = (id) => {
-    setMenuItems(menuItems.map(item =>
-      item.id === id ? { ...item, available: !item.available } : item
-    ));
+  // Add to Cart
+  const addToCart = (item) => {
+    setCart((prev) => {
+      const exists = prev.find(
+        (i) => i.id === item.id && i.tableNumber === item.tableNumber
+      );
+      if (exists) {
+        return prev.map((i) =>
+          i.id === item.id && i.tableNumber === item.tableNumber
+            ? { ...i, quantity: i.quantity + 1 }
+            : i
+        );
+      }
+      return [...prev, item];
+    });
   };
 
+  // Hide / Unhide menu item
+  const toggleAvailable = (id) => {
+    setMenuItems((prev) =>
+      prev.map((item) =>
+        item.id === id ? { ...item, available: !item.available } : item
+      )
+    );
+  };
+
+  // Delete menu item
   const deleteMenuItem = (id) => {
-    setMenuItems(menuItems.filter(item => item.id !== id));
+    setMenuItems((prev) => prev.filter((item) => item.id !== id));
+  };
+
+  // Edit menu item
+  const editMenuItem = (id, updatedItem) => {
+    setMenuItems((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, ...updatedItem } : item))
+    );
   };
 
   return (
-    <MenuContext.Provider value={{ menuItems, setMenuItems, toggleAvailable, deleteMenuItem }}>
+    <MenuContext.Provider
+      value={{
+        menuItems,
+        setMenuItems,
+        cart,
+        addToCart,
+        toggleAvailable,
+        deleteMenuItem,
+        editMenuItem,
+      }}
+    >
       {children}
     </MenuContext.Provider>
   );
 };
-
-export const useMenu = () => useContext(MenuContext);
-export default MenuContext;

@@ -9,8 +9,8 @@ import img8 from "../assets/ice cream.jpg";
 
 const MenuItems = [
   { id: 1, name: "Grilled Chicken", image: img1, price: 12.99, description: "Juicy grilled chicken.", available: true },
-  { id: 2, name: "Full Chicken", image: img2, price: 18.5, description: "Tender steak grilled.", available: true },
-  { id: 3, name: "Chicken Leg", image: img3, price: 10.99, description: "Creamy pasta with cheese.", available: true },
+  { id: 2, name: "Full Chicken", image: img2, price: 18.5, description: "Tender whole grilled chicken.", available: true },
+  { id: 3, name: "Chicken Leg", image: img3, price: 10.99, description: "Tender grilled chicken leg.", available: true },
   { id: 4, name: "Grilled Fish with Fries", image: img4, price: 14.5, description: "Crispy fish with fries.", available: true },
   { id: 5, name: "Grilled Fish", image: img5, price: 13.5, description: "Tender grilled fish.", available: true },
   { id: 6, name: "Meat Shawarma", image: img6, price: 8.5, description: "Delicious meat shawarma.", available: true },
