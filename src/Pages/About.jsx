@@ -2,12 +2,12 @@ import React from "react";
 
 function About() {
   return (
-    <section className="bg-white min-h-screen py-16 px-6">
+    <section className="bg-white min-h-screen py-16 mt-20 px-6">
       <div className="max-w-6xl mx-auto text-center mb-12">
-        <h2 className="text-4xl font-bold text-green-800 mb-4">About Us</h2>
+        <h2 className="text-4xl font-bold text-green-800 mb-4">Nagu Saabsan</h2>
         <p className="text-gray-600 text-lg">
-         <span className="text-green-400 font-bold"> Kc Restaurant</span> is more than just a place to eat — it’s a place where flavor meets passion.
-          Since our founding, we’ve been serving fresh, delicious, and memorable dishes.
+          <span className="text-green-400 font-bold">Kc Restaurant</span> ma aha oo kaliya meel lagu cunteeyo — waa goob ay dhadhan iyo jacayl kulmaan.
+          Tan iyo markii la aasaasay, waxaannu u adeegaynay cunto cusub, dhadhan leh, oo xasuus reebta.
         </p>
       </div>
 
@@ -18,14 +18,14 @@ function About() {
           className="rounded-2xl shadow-xl"
         />
         <div className="text-left">
-          <h3 className="text-2xl font-semibold mb-3 text-green-500">Our Story</h3>
+          <h3 className="text-2xl font-semibold mb-3 text-green-500">Sheekadeenna</h3>
           <p className="text-gray-600 leading-relaxed mb-4">
-            Founded in 2022, Kc Restaurant started as a small kitchen with a dream — to create food that connects people. 
-            Our chefs put love into every meal, ensuring a memorable dining experience every time.
+            Waxaa la aasaasay 2022, Kc Restaurant waxa uu ka bilowday jikada yar oo leh hal riyo — in la abuuro cunto dadka isku keenta. 
+            Chef-yadeennu waxay jacayl iyo dadaal ku daraan cunto kasta si aad mar walba u hesho waayo-aragnimo gaar ah.
           </p>
           <p className="text-gray-600 leading-relaxed">
-            We believe great food brings great memories. Whether it's a family dinner or a romantic night out, 
-            Kc Restaurant is your home for taste and comfort.
+            Waxaan aaminsanahay in cunto wanaagsan ay xasuus wanaagsan keento. Hadday tahay qoys casho wadaagaya ama habeen romantik ah, 
+            Kc Restaurant waa guriga dhadhanka iyo raaxada.
           </p>
         </div>
       </div>

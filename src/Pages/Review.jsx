@@ -5,7 +5,7 @@ const reviews = [
     id: 1,
     name: "Aisha M.",
     comment:
-      "The food was absolutely delicious and the service was outstanding! Highly recommend Kc Restaurant.",
+      "Cuntadu aad bay u dhadhan fiicanayd, adeegguna wuu ka sii wanaagsanaa! Si weyn baan ugu talinayaa Kc Restaurant.",
     rating: 5,
     image: "https://randomuser.me/api/portraits/women/79.jpg",
   },
@@ -13,7 +13,7 @@ const reviews = [
     id: 2,
     name: "Mohamed A.",
     comment:
-      "Great ambiance and fresh ingredients. I’ll definitely come back again.",
+      "Jawigu aad buu u qurux badan yahay, cuntoyaduna waa mid cusub oo tayo leh. Dabcan mar kale waan soo laabanayaa.",
     rating: 4,
     image: "https://randomuser.me/api/portraits/men/45.jpg",
   },
@@ -21,7 +21,7 @@ const reviews = [
     id: 3,
     name: "Layla H.",
     comment:
-      "Everything was perfect — from the appetizers to dessert. 5 stars!",
+      "Wax walba waa ay ku habboonaayeen — laga bilaabo appetizers ilaa macmacaanka. 5 xiddig!",
     rating: 5,
     image: "https://randomuser.me/api/portraits/women/90.jpg",
   },
@@ -30,9 +30,9 @@ const reviews = [
 function Review() {
   return (
     <section className="bg-white min-h-screen py-16 px-6">
-      <div className="max-w-6xl mx-auto text-center mb-10">
-        <h2 className="text-4xl font-bold text-green-500 mb-4">Customer Reviews</h2>
-        <p className="text-gray-600">What our customers are saying</p>
+      <div className="max-w-6xl mx-auto text-center mt-20  mb-10">
+        <h2 className="text-4xl font-bold text-green-500 mb-4">Faallooyinka Macaamiisha</h2>
+        <p className="text-gray-600">Waa kuwan dadka nagu soo booqda ay ka sheegayaan</p>
       </div>
 
       <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">

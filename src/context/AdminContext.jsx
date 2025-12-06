@@ -3,35 +3,49 @@ import { createContext, useContext, useState } from "react";
 const AdminContext = createContext();
 
 export const AdminProvider = ({ children }) => {
-  const [admin, setAdmin] = useState(
-    JSON.parse(localStorage.getItem("admin")) || null
+  // array of admins
+  const [admins, setAdmins] = useState(
+    JSON.parse(localStorage.getItem("admins")) || []
   );
-  const [isAdmin, setIsAdmin] = useState(
-    JSON.parse(localStorage.getItem("isAdmin")) || false
+  const [currentAdmin, setCurrentAdmin] = useState(
+    JSON.parse(localStorage.getItem("currentAdmin")) || null
   );
 
-  // ✅ Login function oo marka password sax yahay, isla markaas user-ka loo fasaxo
   const loginAdmin = ({ username, password }) => {
-    const storedAdmin = JSON.parse(localStorage.getItem("admin"));
-    if (storedAdmin && username === storedAdmin.username && password === storedAdmin.password) {
-      setIsAdmin(true);                   // User-ka waa admin hadda
-      localStorage.setItem("isAdmin", true);
-      return true;                        // ✅ Login guuleystay → AdminPage wuu arki karaa
+    const foundAdmin = admins.find(
+      (a) => a.username === username && a.password === password
+    );
+    if (foundAdmin) {
+      setCurrentAdmin(foundAdmin);
+      localStorage.setItem("currentAdmin", JSON.stringify(foundAdmin));
+      return true;
     }
-    setIsAdmin(false);
-    return false;                         // Password ama username khalad
+    return false;
   };
 
-  // Registration (signup)
   const registerAdmin = ({ username, password }) => {
-    const newAdmin = { username, password };
-    setAdmin(newAdmin);
-    localStorage.setItem("admin", JSON.stringify(newAdmin));
+    const newAdmin = { id: Date.now(), username, password, role: "Admin" };
+    setAdmins([...admins, newAdmin]);
+    localStorage.setItem("admins", JSON.stringify([...admins, newAdmin]));
     return true;
   };
 
+  const removeAdmin = (id) => {
+    const filtered = admins.filter((a) => a.id !== id);
+    setAdmins(filtered);
+    localStorage.setItem("admins", JSON.stringify(filtered));
+  };
+
   return (
-    <AdminContext.Provider value={{ admin, isAdmin, loginAdmin, registerAdmin }}>
+    <AdminContext.Provider
+      value={{
+        admins,
+        currentAdmin,
+        loginAdmin,
+        registerAdmin,
+        removeAdmin,
+      }}
+    >
       {children}
     </AdminContext.Provider>
   );
