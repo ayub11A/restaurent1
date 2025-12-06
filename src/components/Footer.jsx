@@ -15,9 +15,9 @@ function Footer() {
               alt="Logo"
               className="w-10 h-10 rounded-[10px]"
             />
-            <h1 className="text-green-500 text-2xl font-extrabold">
-              <span className="text-white">Kc</span> Restaurant
-            </h1>
+          
+                   <h1 className="text-green-500 text-2xl "> <span className="text-white"> <span className="text-amber-300">K</span><span className="text-red-300">c</span></span> <span className="text-red-600">chicken</span><span className="text-black">&</span ><span className="text-amber-300">chips</span> </h1>
+
           </div>
 
           <p className="text-sm leading-6 mt-10">
