@@ -1,49 +1,87 @@
-import { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const AdminContext = createContext();
 
 export const AdminProvider = ({ children }) => {
-  // array of admins
-  const [admins, setAdmins] = useState(
-    JSON.parse(localStorage.getItem("admins")) || []
-  );
+  const [admins, setAdmins] = useState([]);
+  const [pendingAdmins, setPendingAdmins] = useState([]);
   const [currentAdmin, setCurrentAdmin] = useState(
     JSON.parse(localStorage.getItem("currentAdmin")) || null
   );
 
-  const loginAdmin = ({ username, password }) => {
-    const foundAdmin = admins.find(
-      (a) => a.username === username && a.password === password
-    );
-    if (foundAdmin) {
-      setCurrentAdmin(foundAdmin);
-      localStorage.setItem("currentAdmin", JSON.stringify(foundAdmin));
-      return true;
-    }
-    return false;
-  };
+  useEffect(() => {
+    const savedAdmins = JSON.parse(localStorage.getItem("admins")) || [];
+    const savedPending = JSON.parse(localStorage.getItem("pendingAdmins")) || [];
 
-  const registerAdmin = ({ username, password }) => {
-    const newAdmin = { id: Date.now(), username, password, role: "Admin" };
-    setAdmins([...admins, newAdmin]);
-    localStorage.setItem("admins", JSON.stringify([...admins, newAdmin]));
+    const superAdmin = {
+      username: "Eng-mire",
+      email: "mohamedamiin0488@gmail.com",
+      password: "Eng-mire5029",
+      status: "approved",
+      id: 1
+    };
+
+    if (!savedAdmins.some(a => a.email === superAdmin.email)) {
+      savedAdmins.push(superAdmin);
+      localStorage.setItem("admins", JSON.stringify(savedAdmins));
+    }
+
+    setAdmins(savedAdmins);
+    setPendingAdmins(savedPending);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("admins", JSON.stringify(admins));
+    localStorage.setItem("pendingAdmins", JSON.stringify(pendingAdmins));
+  }, [admins, pendingAdmins]);
+
+  useEffect(() => {
+    if (currentAdmin) localStorage.setItem("currentAdmin", JSON.stringify(currentAdmin));
+    else localStorage.removeItem("currentAdmin");
+  }, [currentAdmin]);
+
+  const registerAdmin = (admin) => {
+    if ([...admins, ...pendingAdmins].some(a => a.username === admin.username || a.email === admin.email))
+      return false;
+    setPendingAdmins([...pendingAdmins, { ...admin, status: "pending", id: Date.now() }]);
     return true;
   };
 
-  const removeAdmin = (id) => {
-    const filtered = admins.filter((a) => a.id !== id);
-    setAdmins(filtered);
-    localStorage.setItem("admins", JSON.stringify(filtered));
+  const approveAdmin = (email) => {
+    const adminToApprove = pendingAdmins.find(a => a.email === email);
+    if (!adminToApprove) return;
+    setPendingAdmins(pendingAdmins.filter(a => a.email !== email));
+    setAdmins([...admins, { ...adminToApprove, status: "approved" }]);
   };
+
+  const loginAdmin = ({ username, email, password }) => {
+    const approvedUser = admins.find(a => a.username === username && a.email === email);
+    if (approvedUser) {
+      if (approvedUser.password === password) {
+        setCurrentAdmin(approvedUser);
+        return "approved";
+      }
+      return "wrong-password";
+    }
+
+    if (pendingAdmins.find(a => a.username === username && a.email === email)) return "pending";
+
+    return "not-found";
+  };
+
+  const logoutAdmin = () => setCurrentAdmin(null);
 
   return (
     <AdminContext.Provider
       value={{
         admins,
+        pendingAdmins,
         currentAdmin,
-        loginAdmin,
+        setCurrentAdmin,
         registerAdmin,
-        removeAdmin,
+        approveAdmin,
+        loginAdmin,
+        logoutAdmin,
       }}
     >
       {children}

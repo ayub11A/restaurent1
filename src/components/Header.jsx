@@ -36,7 +36,8 @@ return ( <header className="fixed top-0 left-0 w-full bg-gray-700 shadow-md z-50
          src={Logo}
          alt="Logo"
          className="w-10 h-10 rounded-[10px]"
-       /> <h1 className="text-green-500 text-2xl "> <span className="text-white"> <span className="text-amber-300">K</span><span className="text-red-400">c</span></span> <br /> <span className="text-red-600">chicken</span><span className="text-black">&</span ><span className="text-amber-300">chips</span> </h1></div>
+       /> <h1 className="text-green-500 text-2xl -mt-5  "> <span className="text-white "> <span className="text-amber-400  ">K</span><span className="text-red-800  ">C</span></span> </h1>
+       <h2 className="mt-5 -ml-7 "> <span className="text-red-500  ">chicken</span><span className="text-black">&</span ><span className="text-amber-200">chips</span> </h2></div>
 
     {/* Desktop Navigation */}
     <ul className="hidden md:flex items-center gap-6">
