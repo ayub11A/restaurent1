@@ -87,7 +87,7 @@ function AdminDashboard() {
         <h2 className="text-2xl font-semibold mb-4">Menu Items</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {menuItems.map((item) => (
-            <div key={item.id} className="bg-white border rounded-lg shadow hover:shadow-lg transition p-4">
+            <div key={item.id} className="bg-gray-200 border rounded-lg shadow hover:shadow-lg transition p-4">
               <img src={item.image} alt={item.name} className="w-full h-36 object-cover rounded mb-3" />
               <h3 className="font-bold text-lg">{item.name}</h3>
               <p className="text-gray-600 mb-1">{item.description}</p>
@@ -133,7 +133,7 @@ function AdminDashboard() {
                 {order.status !== "Delivered" && (
                   <button
                     onClick={() => changeOrderStatus(order.id, "Delivered")}
-                    className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition"
+                    className="bg-gray-600 text-white px-3 py-1 rounded hover:bg-green-700 transition"
                   >
                     Mark as Delivered
                   </button>

@@ -3,14 +3,17 @@ import { useCart } from "../context/Cartcontext";
 import { useOrder } from "../context/OrderContext";
 
 function CartPage() {
-  const { cartItems, clearCart } = useCart();
+  const { cart, clearCart } = useCart();
+  const cartItems = cart || [];
   const { createOrder } = useOrder();
-  const total = cartItems.reduce((sum, i) => sum + i.price, 0);
+
+  const total = cartItems.reduce((sum, i) => sum + i.price * (i.quantity || 1), 0);
 
   const handleOrder = () => {
     if (cartItems.length === 0) return;
-    createOrder(cartItems);
-    clearCart();
+
+    createOrder(cartItems); // Dalabka wuxuu tagayaa OrderContext
+    clearCart();            // Cart waa la nadiifiyaa
   };
 
   return (
@@ -24,13 +27,23 @@ function CartPage() {
           <>
             <div className="space-y-4">
               {cartItems.map((item, i) => (
-                <div key={i} className="flex items-center justify-between border p-4 rounded-lg hover:shadow-md">
+                <div
+                  key={i}
+                  className="flex items-center justify-between border p-4 rounded-lg hover:shadow-md"
+                >
                   <div className="flex items-center gap-4">
-                    <img src={item.image} alt={item.name} className="w-20 h-20 object-cover rounded-lg border" />
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-20 h-20 object-cover rounded-lg border"
+                    />
                     <div>
                       <h3 className="text-lg font-semibold">{item.name}</h3>
                       <p>${item.price.toFixed(2)}</p>
-                      <p className="text-sm text-gray-500">Table: {item.tableNumber}</p>
+                      <p className="text-sm text-gray-500">
+                        Table: {item.tableNumber}
+                      </p>
+                      <p>Qty: {item.quantity}</p>
                     </div>
                   </div>
                 </div>
@@ -38,8 +51,13 @@ function CartPage() {
             </div>
 
             <div className="mt-6 flex flex-col items-center">
-              <h2 className="text-xl font-bold mb-2">Total: ${total.toFixed(2)}</h2>
-              <button onClick={handleOrder} className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">
+              <h2 className="text-xl font-bold mb-2">
+                Total: ${total.toFixed(2)}
+              </h2>
+              <button
+                onClick={handleOrder}
+                className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition"
+              >
                 ✅ Confirm Order
               </button>
             </div>

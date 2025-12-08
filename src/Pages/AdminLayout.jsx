@@ -19,7 +19,7 @@ function AdminLayout() {
           <Link to="/admin" className="flex items-center gap-3 hover:text-green-300"><FaHome /> Dashboard</Link>
           <Link to="/admin/admins" className="flex items-center gap-3 hover:text-green-300 pt-10"><FaUsers /> Manage Admins</Link>
           <Link to="/admin/orders" className="flex items-center gap-3 hover:text-green-300 pt-20"><FaShoppingBag /> Orders</Link>
-          <button onClick={handleLogout} className="flex items-center gap-3 text-red-300 hover:text-red-500 pt-20  mt-6"><FaSignOutAlt /> Logout</button>
+         <Link to="/"><button className="flex items-center gap-3 text-red-300 hover:text-red-500 pt-20  mt-6"><FaSignOutAlt /> Logout</button></Link> 
         </nav>
       </aside>
       <main className="flex-1 p-10 "><Outlet /></main>

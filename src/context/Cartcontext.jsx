@@ -1,20 +1,33 @@
 import React, { createContext, useContext, useState } from "react";
 
-// --- Context iyo hook ---
 const CartContext = createContext();
 export const useCart = () => useContext(CartContext);
 
-// --- Provider ---
 export const CartProvider = ({ children }) => {
-const [cartItems, setCartItems] = useState([]);
+  const [cart, setCart] = useState([]);
 
-const addToCart = (item) => setCartItems(prev => [...prev, item]);
-const removeFromCart = (id) => setCartItems(prev => prev.filter(i => i.id !== id));
-const clearCart = () => setCartItems([]);
+  const addToCart = (item, tableNumber) => {
+    setCart((prev) => {
+      const exist = prev.find(
+        (i) => i.id === item.id && i.tableNumber === tableNumber
+      );
+      if (exist) {
+        return prev.map((i) =>
+          i.id === item.id && i.tableNumber === tableNumber
+            ? { ...i, quantity: i.quantity + 1 }
+            : i
+        );
+      } else {
+        return [...prev, { ...item, quantity: 1, tableNumber }];
+      }
+    });
+  };
 
-return (
-<CartContext.Provider value={{ cartItems, addToCart, removeFromCart, clearCart }}>
-{children}
-</CartContext.Provider>
-);
+  const clearCart = () => setCart([]);
+
+  return (
+    <CartContext.Provider value={{ cart, addToCart, clearCart }}>
+      {children}
+    </CartContext.Provider>
+  );
 };
